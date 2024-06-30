@@ -1,0 +1,40 @@
+#include <HCSR04.h>
+
+#define GREEN_LED  3
+#define AMBER_LED  4
+#define RED_LED    5
+
+byte triggerPin = 7;
+byte echoPin = 6;
+
+void setup() {
+  HCSR04.begin((triggerPin, echoPin);
+  pinMode(GREEN_LED, OUTPUT);
+  pinMode(AMBER_LED, OUTPUT);
+  pinMode(RED_LED,   OUTPUT);
+}
+
+void loop() {
+  double distance_cm = HCSR04.measureDistanceCm()[0];
+
+  if(distance_cm < 200)        
+  {
+    digitalWrite(GREEN_LED, LOW);
+    digitalWrite(AMBER_LED, LOW);
+    digitalWrite(RED_LED,   HIGH);
+  }
+  else if (distance_cm > 800)   
+  {
+    digitalWrite(GREEN_LED, HIGH);
+    digitalWrite(AMBER_LED, LOW);
+    digitalWrite(RED_LED,   LOW);
+  }
+  else
+  {
+    digitalWrite(GREEN_LED, LOW);
+    digitalWrite(AMBER_LED, HIGH);
+    digitalWrite(RED_LED,   LOW);
+  }
+
+  delay(250);
+}
