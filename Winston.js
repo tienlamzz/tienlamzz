@@ -54,3 +54,24 @@ var logger = new (winstone.Logger)({
         })
     ]
 });
+
+var fs = require('fs');
+
+var inname= './outpout.txt';
+var outname = './output2.txt';
+
+fs.exists(outname, function (exists) {
+    if (exists) {
+        fs.unlink(outname, function (err) {
+            if (err) throw err;
+            logger.info(' Existing file [' + outname +'] Deleted.');
+        });
+    }
+
+    var infile = fs.createReadStream(inname, {flags: 'r'} );
+    var outfile = fs.createWriteStream(outname, {flags: 'w'});
+
+    infile.pipe(outfile);
+    logger.info(' Copy file [' + inname + '] -> [' + outname = ']');
+});
+            
